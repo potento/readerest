@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StatusBar, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { styles } from './styles';
+import pdfToText from 'react-pdftotext'
 
 export default function App() {
   const [inputText, setInputText] = useState('');
@@ -45,8 +46,16 @@ export default function App() {
     }
   };
 
+  function extractText(event) {
+      const file = event.target.files[0]
+      pdfToText(file)
+          .then(text => setInputText(text))
+          .catch(error => setInputText("No se pudo extraer tu PDF"))
+  }
+
   return (
     <View style={styles.container}>
+      <input type="file" accept="application/pdf" onChange={extractText}/>
       <TextInput
         placeholder="Pega un texto largo aquí"
         multiline
