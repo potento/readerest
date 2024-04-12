@@ -1,0 +1,22 @@
+{
+    "lang_txt": {
+        "eo": "Lingvon",
+        "es": "Idioma",
+        "en": "Language"
+    },
+    "paste_txt": {
+        "eo": "Algluu longan tekston ĉi tie",
+        "es": "Pega un texto largo aquí",
+        "en": "Paste a long text here"
+    },
+    "speed_txt": {
+        "eo": "Rapido: ",
+        "es": "Velocidad: ",
+        "en": "Speed: "
+    },
+    "sec_per_word_txt": {
+        "eo": " sekundoj por vorto",
+        "es": " segundos por palabra",
+        "en": " seconds per word: "
+    }
+}
