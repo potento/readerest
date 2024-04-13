@@ -4,6 +4,7 @@ import { StatusBar, Text, View, TextInput, TouchableOpacity, Modal, Button } fro
 import { Ionicons } from '@expo/vector-icons';
 import { styles } from './styles';
 import strings from './languages.json';
+import pdfToText from 'react-pdftotext'
 
 export default function App() {
   // Getters and setters
@@ -55,6 +56,13 @@ export default function App() {
     setModalVisible(false);
   };
 
+  function extractText(event) {
+    const file = event.target.files[0]
+    pdfToText(file)
+        .then(text => setInputText(text))
+        .catch(error => setInputText("No se pudo extraer tu PDF"))
+  }
+
   // Language variables
     const lang_txt          = strings.lang_txt[language];
     const paste_txt         = strings.paste_txt[language];
@@ -85,6 +93,7 @@ export default function App() {
           </View>
         </View>
       </Modal>
+      <input type="file" accept="application/pdf" onChange={extractText}/>
       <TextInput
         placeholder={paste_txt}
         multiline
