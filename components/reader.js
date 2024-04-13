@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import strings from './languages.json';
+import strings from '../languages.json';
 import pdfToText from 'react-pdftotext'
-import { styles } from './styles';
+import { styles } from '../styles';
 import { StatusBar, Text, View, TextInput, TouchableOpacity, Modal, Button } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { LanguageContext } from '../App';
 
 export default function reader() {
     // Getters and setters
@@ -12,6 +13,12 @@ export default function reader() {
     const [wordIndex, setWordIndex] = useState(0);
     const [speed, setSpeed] = useState(0.5);
     const [isReading, setIsReading] = useState(false);
+    const { language } = useContext(LanguageContext);
+
+    // Language variables
+    const paste_txt         = strings.paste_txt[language];
+    const speed_txt         = strings.speed_txt[language];
+    const sec_per_word_txt  = strings.sec_per_word_txt[language];
 
 
     useEffect(() => {

@@ -1,17 +1,16 @@
 import React from 'react';
 import { Text, View, Modal, Button } from 'react-native';
-import strings from './languages.json';
-import { styles } from './styles';
+import strings from '../languages.json';
+import { styles } from '../styles';
+import { LanguageContext } from '../App';
 
 export default function NavBar() {
-    const [language, setLanguage] = useState('es');
+    const [language, setLanguage] = useContext(LanguageContext);
+
     const [modalVisible, setModalVisible] = useState(false);
 
     // Language variables
     const lang_txt          = strings.lang_txt[language];
-    const paste_txt         = strings.paste_txt[language];
-    const speed_txt         = strings.speed_txt[language];
-    const sec_per_word_txt  = strings.sec_per_word_txt[language];
 
     const handleChangeLanguage = (lang) => {
         setLanguage(lang);
