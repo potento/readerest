@@ -1,16 +1,16 @@
 import React, { useState, useContext } from 'react';
-import { Text, View, Modal, Button } from 'react-native';
+import { Text, View, Modal, Button, TouchableOpacity } from 'react-native';
 import strings from '../languages.json';
 import { styles } from '../styles';
-import { LanguageContext } from '../App';
+import { LanguageContext } from '../App'; // Importar el contexto desde App.js
 
 export default function NavBar() {
-    const [language, setLanguage] = useContext(LanguageContext);
+    const { language, setLanguage } = useContext(LanguageContext);
 
     const [modalVisible, setModalVisible] = useState(false);
 
     // Language variables
-    const lang_txt          = strings.lang_txt[language];
+    const lang_txt = strings.lang_txt[language];
 
     const handleChangeLanguage = (lang) => {
         setLanguage(lang);
