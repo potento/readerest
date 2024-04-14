@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import strings from '../languages.json';
 import pdfToText from 'react-pdftotext'
 import { styles } from '../styles';
-import { StatusBar, Text, View, TextInput, TouchableOpacity, Modal, Button } from 'react-native';
+import { StatusBar, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { LanguageContext } from '../App';
 

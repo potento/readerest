@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { Text, View, Modal, Button } from 'react-native';
 import strings from '../languages.json';
 import { styles } from '../styles';
