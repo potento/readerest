@@ -64,7 +64,7 @@ export default function reader() {
         setWords([]);
         setWordIndex(0);
       };
-      
+
     const increaseSpeed = () => {
         setSpeed((prevSpeed) => prevSpeed + 0.05);
     };
@@ -118,8 +118,5 @@ export default function reader() {
             <Text style={styles.speedText}>{speed_txt}{speed.toFixed(2)}{sec_per_word_txt}</Text>
             <StatusBar style="auto" />
         </View>
-
-
-
     )
 }
