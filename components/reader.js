@@ -13,6 +13,8 @@ export default function reader() {
     const [wordIndex, setWordIndex] = useState(0);
     const [speed, setSpeed] = useState(0.5);
     const [isReading, setIsReading] = useState(false);
+    const [isPaused, setIsPaused] = useState(false);
+    const [pausedIndex, setPausedIndex] = useState(0);
     const { language } = useContext(LanguageContext);
 
     // Language variables
@@ -24,14 +26,22 @@ export default function reader() {
     useEffect(() => {
         let timer;
 
-        if (isReading) {
-            timer = setInterval(() => {
-            setWordIndex((prevIndex) => prevIndex + 1);
-            }, speed * 1000);
-        }
-
-        return () => clearInterval(timer);
-    }, [isReading, wordIndex, speed]);
+        
+    if (isReading && !isPaused) {
+        timer = setInterval(() => {
+          setWordIndex((prevIndex) => {
+            const newIndex = prevIndex + 1;
+            if (newIndex >= words.length) {
+              setIsReading(false); // Se ha llegado al final del texto
+              setWordIndex(0); // Reiniciar el índice de palabra
+            }
+            return newIndex;
+          });
+        }, speed * 1000);
+      }
+  
+      return () => clearInterval(timer);
+    }, [isReading, isPaused, wordIndex, speed, words]);
 
     const handleRead = () => {
         const inputWords = inputText.trim().split(/\s+/);
@@ -39,12 +49,21 @@ export default function reader() {
         if (inputWords.length > 0) {
             setWords(inputWords);
             setIsReading(true);
+            setIsPaused(false); // Reiniciar el estado de pausa
         }
     };  
 
     const handlePause = () => {
         setIsReading(false);
+        setPausedIndex(wordIndex); // Almacenar el índice de palabra actual al pausar
     };
+    
+    const handleRefresh = () => {
+        setIsReading(false);
+        setIsPaused(false);
+        setWords([]);
+        setWordIndex(0);
+      };
 
     const increaseSpeed = () => {
         setSpeed((prevSpeed) => prevSpeed + 0.05);
@@ -81,6 +100,9 @@ export default function reader() {
             <TouchableOpacity style={styles.button} onPress={handlePause}>
                 <Ionicons name="pause" size={24} color="#1a1f1e" />
             </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={handleRefresh}>
+                <Ionicons name="refresh" size={24} color="#1a1f1e" />
+            </TouchableOpacity> 
             <TouchableOpacity style={[styles.button, styles.speedButton]} onPress={decreaseSpeed}>
                 <Ionicons name="arrow-down" size={24} color="#1a1f1e" />
             </TouchableOpacity>
@@ -89,8 +111,8 @@ export default function reader() {
             </TouchableOpacity>
             </View>
             <View style={styles.textContainer}>
-            {words.length > 0 && (
-                <Text style={styles.word}>{words[wordIndex]}</Text>
+            {words.length > 0 && isReading && (
+                <Text style={styles.word}>{words[isPaused ? pausedIndex : wordIndex]}</Text>
             )}
             </View>
             <Text style={styles.speedText}>{speed_txt}{speed.toFixed(2)}{sec_per_word_txt}</Text>
