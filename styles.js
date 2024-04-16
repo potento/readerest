@@ -4,12 +4,12 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#1a1f1e',
+    backgroundColor: '#393852',
   },
   input: {
     height: 100,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: '#ddd',
     marginBottom: 20,
     paddingHorizontal: 10,
     fontSize: 16,
