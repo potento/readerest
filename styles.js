@@ -85,4 +85,20 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 1,
     marginVertical: 10,
   },
+  darkModeButton: {
+    backgroundColor: 'white',
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 20,
+  },
+  darkModeButtonActive: {
+    backgroundColor: 'black',
+  },
+  darkModeButtonText: {
+    color: 'black',
+    fontWeight: 'bold',
+  },
+  darkModeButtonTextActive: {
+    color: 'white',
+  },
 });
